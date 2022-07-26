@@ -27,30 +27,34 @@
         
         case "Vuelo":
             $datos = $vuelo->get_vuelo($body["cod_vuelo"]);
-            echo json_encode($datos);
+            if ($datos == null) {
+                print "El vuelo que busca no existe.";
+            }else{
+                echo json_encode($datos);
+            }
             break;
 
         case "InsertVuelo":
             $datos = $vuelo->insert_vuelo($body["id"],$body["origen"],$body["destino"],$body["fechaVuelo"],$body["cantidadPasajeros"],$body["tipoAvion"],$body["distancia"]);
-            print "Datos insertados";
+            print "El vuelo fue agregado con exito";
             echo json_encode($datos);
             break; 
 
         case "DELVuelo":
             $datos = $vuelo->delete_vuelo($body["cod_vuelo"]);
-            print "Datos Eliminados";
-            echo json_encode($datos);
+            print "Vuelo eliminado con exito";
             break;      
            
         case "UPVuelo":
             $datos = $vuelo->update_vuelo($body["id"],$body["origen"],$body["destino"],$body["fechaVuelo"],$body["cantidadPasajeros"],$body["tipoAvion"],$body["distancia"]);
-            print "Datos actualizados";
-            echo json_encode($datos);
+                print "Vuelo actualizado con exito";
+                
             break;
 
         default:
-            print "API no encontrada o no existente...";
+            print "El API que consulta no se encontró o no existe...";
             break;
     }
-
+    #los "print" no contaban con los mensajes apropiados ya que se encontraba en la fase de prueba.
+    #Ya con cada API testeada doy por terminada la entidad Vuelo.
 ?>
